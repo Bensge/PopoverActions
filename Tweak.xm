@@ -1,3 +1,7 @@
+@interface UIApplication (Private)
+@property UIInterfaceOrientation activeInterfaceOrientation;
+@end
+
 static BOOL fakeiPad = NO;
 
 %hook UIDevice
@@ -43,6 +47,11 @@ static BOOL fakeiPad = NO;
 	fakeiPad = YES;
 	%orig;
 	fakeiPad = NO;
+}
+
+- (void)_presentFromBarButtonItem:(UIBarButtonItem *)barButtonItem orFromRect:(CGRect)rect inView:(UIView *)view direction:(UIPopoverArrowDirection)direction allowInteractionWithViews:(NSArray *)views backgroundStyle:(int)backgroundStyle animated:(BOOL)animated
+{
+	%orig(barButtonItem, rect, view, UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].activeInterfaceOrientation) ? UIPopoverArrowDirectionUp | UIPopoverArrowDirectionDown : UIPopoverArrowDirectionLeft | UIPopoverArrowDirectionRight, views, backgroundStyle, animated);
 }
 %end
 
