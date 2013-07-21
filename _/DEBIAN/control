@@ -1,0 +1,10 @@
+Package: com.bensge.popoveractions
+Name: popoveractions
+Depends: mobilesubstrate
+Version: 0.0.1-3
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: bensge
+Author: bensge
+Section: Tweaks
+Installed-Size: 16
